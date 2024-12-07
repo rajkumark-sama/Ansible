@@ -1,0 +1,20 @@
+---
+# tasks file for setup-apache-role
+- name: install apache package
+  yum:
+    name: httpd
+    state: present
+  when: ansible_os_family == "RedHat"
+  notify: start httpd service
+
+- name: install apache package
+  apt:
+    name: apache2
+    state: present
+  when: ansible_os_family == "Debian"
+  notify: start apache service
+
+- name: copy index file
+  copy:
+    src: /home/ansadmin/Ansible-03-Dec-2024/index.html
+    dest: /var/www/html

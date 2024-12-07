@@ -1,0 +1,10 @@
+---
+- name: Playbook to delete a file from Ansible
+  hosts: all
+  become: true
+  tasks:
+  - name: Deleting testfile
+    file:
+      path: /home/ansadmin/index.html
+      state: absent
+...

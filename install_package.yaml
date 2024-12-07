@@ -1,0 +1,8 @@
+---
+- name: Playbook to install package
+  hosts: all
+  tasks:
+  - name: Installing package
+    yum:
+      name: httpd
+...

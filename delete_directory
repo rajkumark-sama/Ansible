@@ -1,0 +1,10 @@
+---
+- name: Playbook to delete directory
+  hosts: all
+  become: yes
+  tasks:
+  - name: Deleting directory
+    file:
+      path: /home/ansadmin/testdir
+      state: absent
+...

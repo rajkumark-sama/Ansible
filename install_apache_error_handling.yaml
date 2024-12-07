@@ -1,0 +1,22 @@
+---
+- name: Playbook to handle errors
+  hosts: all
+  become: true
+  tasks:
+  - name: copy file from server to node
+    copy:
+      src: /home/ansadmin/Ansible-03-Dec-2024/testfile1
+      dest: /etc/home/ansadmin
+    ignore_errors: yes
+
+  - name: Install httpd package
+    yum:
+      name: httpd
+      state: present
+    when: ansible_os_family == "RedHat"
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+...

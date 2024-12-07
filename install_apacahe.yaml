@@ -1,0 +1,36 @@
+---
+- name: Playbook to install package with os condition
+  hosts: all
+  become: yes
+  tasks:
+  - name: Installing httpd packages
+    yum:
+      name: httpd
+      state: installed
+    when: ansible_os_family == "RedHat"
+
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family == "RedHat"
+
+  - name: Install apache2 packages
+    yum:
+      name: apache2
+      state: installed
+    when: ansible_os_family == "Debian"
+
+  - name: Start apache2 service
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"
+  
+  - name: Copying file to html
+    copy:
+      src: /home/ansadmin/Ansible/index.html
+      dest: /var/www/html
+      mode: 0666
+...
+
